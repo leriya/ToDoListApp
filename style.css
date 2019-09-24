@@ -1,0 +1,37 @@
+* {
+    font-family: cursive;
+    }
+    
+    
+    li {
+      margin-bottom: 10px;
+      margin-left: 20px;
+      list-style-type: none;
+      word-wrap: break-word;  
+    }
+    
+    .clear {
+      margin-left: 20px;
+      font-size: 10px;
+      position: absolute;
+      left: 215px;
+      border-radius: 5px;
+      border: none;
+      background-color: #FFFFFF
+    }
+    
+    div {
+      width: 180px;  
+    }
+    
+    .checkbox {
+      position: absolute;
+      left: 5px;
+      margin-top: 7px;  
+    }
+    
+    button {
+      background-color: rgba(55, 214, 148, 0.651);
+      border-radius: 5px;
+      height: 25px;
+    }
