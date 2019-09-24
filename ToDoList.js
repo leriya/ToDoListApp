@@ -1,43 +1,6 @@
-//import ToDoList from './ToDoList.mjs/index.js';
-class ToDoRender {
+import ToDoRender from "./ToDoRender.js";
 
-  createItemRender(value){
-     let newToDo = document.createElement("LI");
-     newToDo.innerHTML = value;
-     
-     let check = document.createElement("input");
-     check.type = "checkbox";
-     check.className = "checkbox";
-     check.value = value;
- 
-     let del = document.createElement("button");
-     del.value = value;
-     del.innerHTML = "&#10008";
-     del.className = "clear";
-     
-     newToDo.appendChild(check);
-     newToDo.appendChild(del);
-     let list = document.querySelector('div');
-     list.appendChild(newToDo);
-     return [del,check];      
-   }   
-
-  itemDone(element) { 
-             element.parentElement.style.textDecoration = "line-through";
-             element.parentElement.style.color = "#a79a9afd"; 
-      }          
-  itemUndone(element) { 
-          element.parentElement.style.textDecoration = "";
-          element.parentElement.style.color = "";
-   }       
-   
-
-   clearRender(element) {
-       element.parentElement.remove()
-   }
-}
-
-class ToDoList {
+export class ToDoList {
   constructor() {
     this.head = null;
     this.lenght = 0;
@@ -138,24 +101,3 @@ class ToDoList {
     return this;
   }
 }
-
-
-
-let buttonAdd = document.getElementById("Create");
-let input = document.querySelector("input");
-  
-input.onkeyup = () => {
-  if (input.value==="") buttonAdd.disabled = true;
-  else  buttonAdd.disabled = false;
-}
-  
-buttonAdd.onclick = () => {                
-  ToDo1.addToHead(input.value);      
-  input.value='';
-  buttonAdd.disabled = true;
-}
-
-let ToDo1 = new ToDoList();  
-console.log(ToDo1);
-ToDo1.addToHead('first');
-ToDo1.addToHead('second');
