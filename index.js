@@ -14,7 +14,7 @@ class ToDoRender {
     del.value = value;
     del.innerHTML = "&#10008";
     del.className = "clear";
-    //del.onclick = function() {deleteElement(del);};
+    del.onclick = () => {deleteElement(del);};
      
     newToDo.appendChild(check);
     newToDo.appendChild(del);
@@ -72,9 +72,8 @@ class ToDoList {
   
   createItem(value) {        
     const [del, check] = ToDoRender.createItemRender(value);
-    console.log(this);
-    this.clear(del);
-    this.done(check);        
+    console.log(this);    
+    //this.done(check);        
     return this;
   }
 
@@ -159,7 +158,7 @@ function AddNew() {
 function deleteElement(element) {
   let value = element.value;    
   ToDo1.removeItem(value);
-  //ToDo1.clearRender(element);        
+  ToDoRender.clearRender(element);        
   console.log(ToDo1)
 }
 
