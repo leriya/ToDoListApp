@@ -9,6 +9,7 @@ class ToDoRender {
     check.type = "checkbox";
     check.className = "checkbox";
     check.value = value;
+    check.onchange = () => {checkElement(check);};
  
     let del = document.createElement("button");
     del.value = value;
@@ -19,8 +20,7 @@ class ToDoRender {
     newToDo.appendChild(check);
     newToDo.appendChild(del);
     let list = document.querySelector('div');
-    list.appendChild(newToDo);
-    return [del,check];      
+    list.appendChild(newToDo);         
   }   
 
   itemDone(element) { 
@@ -51,7 +51,8 @@ class ToDoList {
     newNode.next = this.head;
     newNode.done = false;
     this.head = newNode;
-    this.lenght++;    
+    this.lenght++; 
+    console.log(this);   
   }
 
   addToEnd(value){
@@ -66,16 +67,9 @@ class ToDoList {
         break;
       }
       Node = Node.next;
-    }
-    this.createItem(value);
+    }    
   }  
-  
-  createItem(value) {        
-    const [del, check] = ToDoRender.createItemRender(value);
-    console.log(this);    
-    //this.done(check);        
-    return this;
-  }
+    
 
   done(element) {
     const value = element.value;
@@ -86,25 +80,20 @@ class ToDoList {
       break;
       Node = Node.next;
     }
-    element.onchange = () => {             
-      if (element.checked){                   
-        Node.done = true;
-        ToDoRender.itemDone(element); 
-      }
-      else {            
-        Node.done = false;
-        ToDoRender.itemUndone(element); 
-      }        
-    }         
+    Node.done = true;            
   }
-   
-  clear(element) {
-    let value = element.value;
-    element.onclick = () => {
-      this.removeItem(value);
-      ToDoRender.clearRender(element);        
+
+  undone(element) {
+    const value = element.value;
+    let Node = this.head;
+
+    while (Node){
+      if (Node.value === value)
+      break;
+      Node = Node.next;
     }
-  }
+    Node.done = false;            
+  }  
 
   removeItem(value) {     
     if (this.head.value === value) {        
@@ -139,7 +128,6 @@ class ToDoList {
 }
 
 
-
 let buttonAdd = document.getElementById("Create");
 let input = document.querySelector("input");
   
@@ -150,7 +138,7 @@ function CheckInput() {
 
 function AddNew() {                
   ToDo1.addToHead(input.value);
-  ToDo1.createItem(input.value);      
+  ToDoRender.createItemRender(input.value);      
   input.value='';
   buttonAdd.disabled = true;
 }
@@ -162,9 +150,17 @@ function deleteElement(element) {
   console.log(ToDo1)
 }
 
+function checkElement(element) {
+  if (element.checked){
+    ToDoRender.itemDone(element);
+    ToDo1.done(element);
+  }
+  else {
+    ToDoRender.itemUndone(element);
+    ToDo1.undone(element);
+  }
+}
+
 let ToDo1 = new ToDoList();  
 console.log(ToDo1);
-ToDo1.addToHead('first');
-ToDo1.createItem('first');
-ToDo1.addToHead('second');
-ToDo1.createItem('second');
+
