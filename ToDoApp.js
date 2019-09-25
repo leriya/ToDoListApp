@@ -36,6 +36,5 @@ class ToDoApp extends ToDoRender{
   }
 }
 
-let ToDo1 = new ToDoApp();  
-console.log(ToDo1);
+
 
