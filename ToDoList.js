@@ -1,10 +1,8 @@
-import ToDoRender from "./ToDoRender.js";
 
-export class ToDoList {
+class ToDoList {
   constructor() {
     this.head = null;
-    this.lenght = 0;
-    ToDoRender = new ToDoRender(); 
+    this.lenght = 0;    
   }
 
   addToHead(value) {
@@ -12,9 +10,8 @@ export class ToDoList {
     newNode.next = this.head;
     newNode.done = false;
     this.head = newNode;
-    this.lenght++;
-    
-    this.createItem(value);
+    this.lenght++; 
+    console.log(this);   
   }
 
   addToEnd(value){
@@ -29,46 +26,33 @@ export class ToDoList {
         break;
       }
       Node = Node.next;
-    }
-    this.createItem(value);
+    }    
   }  
-  
-  createItem(value) {        
-      const [del, check] = ToDoRender.createItemRender(value);
-      console.log(this);
-      this.clear(del);
-      this.done(check);        
-      return this;
-  }
+    
 
   done(element) {
-  const value = element.value;
-  let Node = this.head;
+    const value = element.value;
+    let Node = this.head;
 
-  while (Node){
-    if (Node.value === value)
-    break;
-    Node = Node.next;}     
-
-    element.onchange = () => {             
-      if (element.checked){                   
-          Node.done = true;
-          ToDoRender.itemDone(element); 
-      }
-      else {            
-        Node.done = false;
-        ToDoRender.itemUndone(element); 
-      }        
-    }         
-  }
-   
-  clear(element) {
-    let value = element.value;
-    element.onclick = () => {
-      this.removeItem(value);
-      ToDoRender.clearRender(element);        
+    while (Node){
+      if (Node.value === value)
+      break;
+      Node = Node.next;
     }
+    Node.done = true;            
   }
+
+  undone(element) {
+    const value = element.value;
+    let Node = this.head;
+
+    while (Node){
+      if (Node.value === value)
+      break;
+      Node = Node.next;
+    }
+    Node.done = false;            
+  }  
 
   removeItem(value) {     
     if (this.head.value === value) {        
