@@ -17,13 +17,16 @@ class ToDoList {
   addToEnd(value){
     const newNode = { value };
     let Node = this.head.next;
+
     while(Node){
+
       if (Node.next == null){
         Node.next = newNode;
         newNode.next = null;
         newNode.done = false;
-        this.lenght++;          
-        break;
+        this.lenght++;
+
+        break;        
       }
       Node = Node.next;
     }    
@@ -36,6 +39,7 @@ class ToDoList {
 
     while (Node){
       if (Node.value === value)
+
       break;
       Node = Node.next;
     }
@@ -48,7 +52,7 @@ class ToDoList {
 
     while (Node){
       if (Node.value === value)
-      break;
+        break;
       Node = Node.next;
     }
     Node.done = false;            
@@ -64,12 +68,13 @@ class ToDoList {
       let currNode = this.head.next;
 
       while (currNode) {
-        if (currNode.value === value) 
-        break;
-
+        if (currNode.value === value) {
+          break;
+        }
         prevNode = currNode;
         currNode = currNode.next;
       }
+      
       prevNode.next = currNode.next;
       this.lenght--;
       console.log(value, 'was removed');

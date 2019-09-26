@@ -1,40 +1,48 @@
-class ToDoApp extends ToDoRender{
-  constructor() {
-    super();
+class ToDoApp{
+
+  constructor(_render, _list) {
+    
+    if (!_render || !_list) {
+      throw new Error("argument(s) for constructor is null");      
+    }
+    
+    this.render = _render;
+    this.list = _list;
+
     this.buttonAdd = document.getElementById("Create");
-    this.input = document.querySelector("input");
+    this.input = document.querySelector("input");    
   }
   
   CheckInput() {
-    if (this.input.value==="") this.buttonAdd.disabled = true;
-    else  this.buttonAdd.disabled = false;
+    if (this.input.value === "") {
+      this.buttonAdd.disabled = true;
+    }
+    else { 
+      this.buttonAdd.disabled = false;
+    }
   }
 
   AddNew() {                
-    this.addToHead(this.input.value);
-    this.createItemRender(this.input.value);      
+    this.list.addToHead(this.input.value);
+    this.render.createItemRender(this.input.value, this.checkElement.bind(this), this.deleteElement.bind(this));      
     this.input.value='';
     this.buttonAdd.disabled = true;
   }
 
   deleteElement(element) {
     let value = element.value;    
-    this.removeItem(value);
-    this.clearRender(element);        
-    console.log(ToDo1);
-  }
-
+    this.list.removeItem(value);
+    this.render.clearRender(element);        
+  }  
+  
   checkElement(element) {
     if (element.checked){
-      this.itemDone(element);
-      this.done(element);
+      this.render.itemDone(element);
+      this.list.done(element);      
     }
     else {
-      this.itemUndone(element);
-      this.undone(element);
-    }
+      this.render.itemUndone(element);
+      this.list.undone(element);      
+    }    
   }
 }
-
-
-

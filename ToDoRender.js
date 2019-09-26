@@ -1,20 +1,19 @@
-class ToDoRender extends ToDoList {
+class ToDoRender {
 
-  createItemRender(value){
+  createItemRender(value, checkFunc, deleteFunc){
     let newToDo = document.createElement("LI");
-    newToDo.innerHTML = value;
-     
+    newToDo.innerHTML = value;    
     let check = document.createElement("input");
     check.type = "checkbox";
     check.className = "checkbox";
     check.value = value;
-    check.onchange = () => {this.checkElement(check);};
- 
+    check.onchange = () => {checkFunc(check)};
+     
     let del = document.createElement("button");
     del.value = value;
     del.innerHTML = "&#10008";
     del.className = "clear";
-    del.onclick = () => {this.deleteElement(del);};
+    del.onclick = () => {deleteFunc(del);};
      
     newToDo.appendChild(check);
     newToDo.appendChild(del);
@@ -24,14 +23,13 @@ class ToDoRender extends ToDoList {
 
   itemDone(element) { 
     element.parentElement.style.textDecoration = "line-through";
-    element.parentElement.style.color = "#a79a9afd"; 
+    element.parentElement.style.color = "#778899"; 
   }
 
   itemUndone(element) { 
     element.parentElement.style.textDecoration = "";
     element.parentElement.style.color = "";
-  }       
-   
+  }          
 
   clearRender(element) {
     element.parentElement.remove()
