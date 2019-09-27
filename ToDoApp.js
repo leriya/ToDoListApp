@@ -9,6 +9,9 @@ class ToDoApp{
     this.render = _render;
     this.list = _list;
 
+    this.deleteElement = this.deleteElement.bind(this);
+    this.checkElement = this.checkElement.bind(this);
+
     this.buttonAdd = document.getElementById("Create");
     this.input = document.querySelector("input");    
   }
@@ -24,7 +27,7 @@ class ToDoApp{
 
   AddNew() {                
     this.list.addToHead(this.input.value);
-    this.render.createItemRender(this.input.value, this.checkElement.bind(this), this.deleteElement.bind(this));      
+    this.render.createItemRender(this.input.value, this.checkElement, this.deleteElement);      
     this.input.value='';
     this.buttonAdd.disabled = true;
   }
